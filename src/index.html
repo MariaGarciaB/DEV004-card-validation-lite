@@ -4,28 +4,28 @@
 <head>
   <meta charset="utf-8">
   <title>Tarjeta de crédito válida</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <input id="cardnumber"></input>
-  <button onclick="validate()">Validar</button>
-  <div id="result"></div>
-  <script lang="javascript">
-    function validate() {
-      const valid = isValid(document.getElementById("cardnumber").value)
-      if (valid) {
-        // Show success in div#result
-      }
-      else {
-        // Show error message in div#result
-      }
-    }
 
-    function isValid(creditCardNumber){
-      // is creditCardNumber valid?
-      return false
-    }
-  </script>
-</body>
+  <!-- Capturar número en caja de texto -->
+  <div id="IntroduceNumber">
+    <section class= form-cardnumber>
+        <label for="cardnumber"> Card Number</label> <br>
+  <!-- con type number acepto solamente números en la caja de texto -->
+        <input class="form-input" type="number" id="cardnumber"></input> 
+        <button class= "form-cardnumber" id="btnValidate">Validar</button>
+    </section>
+  </div>
+    
+  <div id="empySpace"></div>
 
-</html>
+   <div id="result"></div>
+
+
+  <script src="./app.js" type="module"> </script>
+  
+  </body>
+  
+  </html>
