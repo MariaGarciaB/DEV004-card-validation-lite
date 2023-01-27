@@ -20,6 +20,7 @@ function isValid(cardnumber) {// recibes el parametro
   const posicionesImpares = [];
   let a = 0;
   let b = 0;
+  let c = 0;
   for (let i = 0; i < inverse.length; i++) {//separar por posiciones
     const array = inverse[i];
     console.log(array)
@@ -38,19 +39,22 @@ function isValid(cardnumber) {// recibes el parametro
       }
     }
     if(i % 2 === 0){//selecciona pocisiones impares
+      c = c + (Number(array));
       posicionesImpares.push(array);//valor pocisiones impares en array
     }
   }
-  const suma = (a + b);//Suma total de pocisiones pares
+  const sumaTotal = (a + b + c);//Suma total
+  if(sumaTotal %10 === 0){//si mi residual es =0, me da una tarjeta valida
+    alert ("Tarjeta Valida")
+  } else{
+    alert ("Tú tarjeta NO es valida. Por favor, ingresa nuevamente tu Card Number")
+  }
   console.log(posicionesImpares)
   console.log(posicionesPares)
+  console.log (c)//suma de posiciones impares
   console.log (b)
   console.log (a)
-  console.log (suma)
+  console.log (sumaTotal)//suma de todos los digitos agregando el resultado anterior
 }
 
-
-
-//suma de posiciones impares
-//suma de todos los digitos agregando el resultado anterior (intenta con push)
-// su la suma termina en <=10 y termina en 0 : DA UNA TARJETA VALIDA
+//  numero ejemplo tarjeta valida 4083952015263
