@@ -1,60 +1,51 @@
 function validate() {
-  const cardnumber = document.getElementById("cardnumber").value;//por medio del btnValidate, se captura el valor en caja vacía
+  const cardnumber = document.getElementById("cardNumber").value;//Capturo datos de mi input
   if (cardnumber === "") {
-    alert("Ingresa los números de tu tarjeta") //Marcar un error cuando no ingresa texto (Operadores lógicos)
+    alert("Ingresa los números de tu tarjeta") //Marcar un error cuando mi caja de texto está vacía
   } else {
-    isValid(cardnumber); // enviamos argumento a nueva funcion
+    isValid(cardnumber); // Envío argumento a nueva función
   }
 }
 
-const btnValidate = document.getElementById("btnValidate");// Llamar al boton
-btnValidate.addEventListener("click", validate);//Manejador de eventos, añade funcionalidad
+const btnValidate = document.getElementById("btnValidate");// Llamo a mi boton
+btnValidate.addEventListener("click", validate);//Agrego un manejador de eventos para "capturar el valor al dar click"
 
-function isValid(cardnumber) {// recibes el parametro
-  console.log(cardnumber)
-  const numberValid = cardnumber.split("");//separar los números en string individuales
-  console.log(numberValid)
-  const inverse = numberValid.reverse();//array en orden inverso
-  console.log(inverse)
-  const posicionesPares = [];
+function isValid(cardnumber) {
+  const numberValid = cardnumber.split("");//Separo mis caracteres
+  const inverse = numberValid.reverse();//Invierto mis caracteres
+  const posicionesPares = [];//Tomo todo mi array puesto en la condicional con .push
   const posicionesImpares = [];
-  let a = 0;
-  let b = 0;
-  let c = 0;
-  for (let i = 0; i < inverse.length; i++) {//separar por posiciones
+  let sumA = 0;//Variables para inicializar a partir del 0 como valor
+  let sumB = 0;
+  let sumC = 0;
+  for (let i = 0; i < inverse.length; i++) {//Separo por pocisiones
     const array = inverse[i];
-    console.log(array)
-    if (i % 2 === 1){//selecciona pocisiones pares (operador modulo)
-      const multiplication = + (array*2);//multiplicar por 2 el valor de posiciones pares
-      console.log(multiplication)
-      posicionesPares.push(array);//valor pocisiones pares en array
-      if(multiplication >9){//seleccionar números mayores a 9
-        const dosDigitos = multiplication.toString().split("");//convertir a string mi true en mayores de 9 (suma pares)
-        const sumaDosDigitos = (Number(dosDigitos[0]) + Number(dosDigitos[1]));//Sumar ambos dígitos
-        console.log (dosDigitos)
-        console.log (sumaDosDigitos)
-        a = a + sumaDosDigitos;//sumar el resultado de todos los "sumaDosDigitos" se declara una variable fuera del for =0 para que comience a partir de ese número
+    if (i % 2 === 1){//Selección posiciones pares (operador módulo)
+      const multiplication = + (array*2);//Multiplico *2 mis pocisiones pares
+      posicionesPares.push(array);
+      if(multiplication >9){//Selecciono números de dos digitos
+        const dosDigitos = multiplication.toString().split("");
+        const sumaDosDigitos = (Number(dosDigitos[0]) + Number(dosDigitos[1]));//Sumo ambos dígitos del resultado de "multiplication"
+        sumA = sumA + sumaDosDigitos;//suma total "sumaDosDigitos"
       }else{
-        b = b + multiplication;//suma pocisiones pares sin multiplicar
+        sumB = sumB + multiplication;//suma pocisiones pares sin multiplicar
       }
     }
-    if(i % 2 === 0){//selecciona pocisiones impares
-      c = c + (Number(array));
-      posicionesImpares.push(array);//valor pocisiones impares en array
+    if(i % 2 === 0){//Selección pocisiones impares
+      sumC = sumC + (Number(array));
+      posicionesImpares.push(array);
     }
   }
-  const sumaTotal = (a + b + c);//Suma total
-  if(sumaTotal %10 === 0){//si mi residual es =0, me da una tarjeta valida
-    alert ("Tarjeta Valida")
+  const sumaTotal = (sumA + sumB + sumC);//Suma total
+  console.log (sumaTotal)
+  if(sumaTotal %10 === 0){//Resultado algoritmo de Luhn; residual es = 0 es una numero de tarjeta válido
+    alert ("Gracias, Tu tarjeta es válida")
   } else{
-    alert ("Tú tarjeta NO es valida. Por favor, ingresa nuevamente tu Card Number")
+    alert ("Tu tarjeta es inválida. Intentalo nuevamente")
   }
-  console.log(posicionesImpares)
-  console.log(posicionesPares)
-  console.log (c)//suma de posiciones impares
-  console.log (b)
-  console.log (a)
-  console.log (sumaTotal)//suma de todos los digitos agregando el resultado anterior
 }
+
+
+
 
 //  numero ejemplo tarjeta valida 4083952015263
